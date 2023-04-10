@@ -16,12 +16,7 @@ namespace Mongo.Repository
         private readonly Context.Context _context;
         private readonly IMongoCollection<TEntity> _collection;
         public MongoRepositoryBase(IOptions<Settings> settings)
-        {
-            //var settings = MongoClientSettings.FromConnectionString("mongodb+srv://rezansoylemez:<password>@frostlinegames.uudbwxv.mongodb.net/?retryWrites=true&w=majority");
-            //settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-            //var client = new MongoClient(settings);
-            //var database = client.GetDatabase("test");
-            
+        { 
             _context = new Context.Context(settings);
             _collection=_context.GetCollection<TEntity>();
         }
