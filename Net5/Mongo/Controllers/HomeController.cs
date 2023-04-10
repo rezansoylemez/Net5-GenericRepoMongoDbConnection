@@ -14,30 +14,99 @@ namespace Mongo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository<Personel> _personelRepository;
-        public HomeController(ILogger<HomeController> logger, IRepository<Personel> personelRepository)
+        private readonly IRepository<PersonelDetail> _personelDetailRepository;
+        private readonly IRepository<Company> _companyRepository;
+
+        public HomeController(ILogger<HomeController> logger, IRepository<Personel> personelRepository, IRepository<PersonelDetail> personelDetailRepository, IRepository<Company> companyRepository)
         {
             _logger = logger;
             _personelRepository = personelRepository;
+            _personelDetailRepository = personelDetailRepository;
+            _personelDetailRepository = personelDetailRepository;
+            _companyRepository = companyRepository;
         }
 
         public IActionResult Index()
         {
             var result = _personelRepository.InsertOne(new Personel
             {
-                Id=1,
+                Id = 10,
                 Name = "aa",
                 Surname = "aa",
-                Age = 27,
-                Title = "aa"
+                PersonelDetailId = 3,
             });
-            var result2 = _personelRepository.InsertOneAsync(new Personel
+            var result2 = _personelDetailRepository.InsertOne(new PersonelDetail
             {
-                Id =2,
-                Name = "aa",
-                Surname = "aa",
-                Age = 27,
-                Title = "aa"
+                Id = 3,
+                Email = "aaa",
+                PhoneNumber="123",
+                Age=111,
+                Title=".",
+                JobDescription=".",
+                PersonelId=10,
             });
+            var result3 = _personelRepository.InsertOne(new Personel
+            {
+                Id = 11,
+                Name = "bb",
+                Surname = "bb",
+                PersonelDetail = new PersonelDetail{
+                    Id=5,
+                    Email = "bb",
+                    PhoneNumber = "123",
+                    Age = 111,
+                    Title = ".",
+                    JobDescription = ".",
+                    PersonelId = 11,
+                }
+            });
+            var result4 = _personelRepository.InsertOne(new Personel
+            {
+                Id = 12,
+                Name = "bb",
+                Surname = "bb",
+                PersonelDetail = new PersonelDetail
+                {
+                    Id = 6,
+                    Email = "bb",
+                    PhoneNumber = "123",
+                    Age = 111,
+                    Title = ".",
+                    JobDescription = ".",
+                    PersonelId = 12,
+                },
+                Company = new Company
+                {
+                    Id=1,
+                    Name="a",
+                    Count=2,
+                    Category="a",
+                }
+            });
+            var result5 = _companyRepository.InsertOne(new Company
+            {
+                Id = 12,
+                Name = "bb",
+                Count=1,
+                //Personels=new List<Personel>
+                //{
+                //    Id = 6,
+                //    Email = "bb",
+                //    PhoneNumber = "123",
+                //    Age = 111,
+                //    Title = ".",
+                //    JobDescription = ".",
+                //    PersonelId = 12,
+                //},
+                //Company = new Company
+                //{
+                //    Id = 1,
+                //    Name = "a",
+                //    Count = 2,
+                //    Category = "a",
+                //}
+            });
+
             return View();
         }
 

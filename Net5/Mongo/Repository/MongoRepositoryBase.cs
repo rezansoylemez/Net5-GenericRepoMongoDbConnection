@@ -24,8 +24,6 @@ namespace Mongo.Repository
             
             _context = new Context.Context(settings);
             _collection=_context.GetCollection<TEntity>();
-
-            
         }
         
         public GetManyResult<TEntity> AsQueryable()
